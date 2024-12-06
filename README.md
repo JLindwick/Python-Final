@@ -116,9 +116,9 @@ The **Pokémon API** (https://pokeapi.co/) is used extensively to enhance gamepl
 1. **Choose a Pokémon Generation**:
    ```
    1. All
-   2. Generation I
+   2. Generation 1
    ...
-   10. Generation IX
+   10. Generation 9
    Which generation would you like to use?: 1
    ```
 
