@@ -1,94 +1,178 @@
-**Pokémon Battle Utility Library**
-This Python project provides a comprehensive set of tools and functionalities to interact with the Pokémon API (pokeapi.co) and perform various operations like fetching Pokémon data, generating type advantages, and building dynamic Pokémon movesets.
 
-**Features**
-Roman Numerals Conversion
-Convert Roman numerals into integers for usability in Pokémon generation naming.
+# Pokémon Battle Simulator
 
-**API Connectivity**
-Retrieves detailed Pokémon data from the Pokémon API, including:
+## Overview
 
-**Pokémon regions**
-Pokémon types and their strengths/weaknesses
-Generations and associated Pokémon
-Pokémon stats, moves, and type-specific advantages
-Dynamic Pokémon Battle System
+The **Pokémon Battle Simulator** is a turn-based game that allows players to build their Pokémon team, battle opponents, and experience Pokémon-style gameplay. The program integrates with the **Pokémon API** to dynamically fetch Pokémon stats, moves, sounds, and type advantages, ensuring an authentic experience.
 
-**Assigns random moves to Pokémon.**
-Includes type effectiveness (strengths and weaknesses) for more realistic battles.
-Pokémon Sound Effects
-Plays Pokémon cries using vlc.
+The game also provides modular code, making it easy to extend and add new mechanics.
 
-**Installation**
+---
 
-**Prerequisites**
-Python 3.8 or higher
+## Features
 
-**Dependencies**:
-requests: For API communication
-vlc: To play Pokémon cries
-random: For random sampling of movesets
-Install the required dependencies via pip:
-pip install requests python-vlc
+- **Dynamic API Integration**:
+  - Fetch real-time Pokémon stats, moves, and type advantages using the Pokémon API.
+  - Hear Pokémon cry sounds retrieved from the API during battles.
+- **Team Building**:
+  - Choose your Pokémon team (up to 6 Pokémon) from any generation or a mix of all generations.
+- **Wild Pokémon Encounters**:
+  - Battle and attempt to catch wild Pokémon using Pokéballs.
+- **Trainer Battles**:
+  - Battle against AI-controlled teams randomly generated from your chosen generation.
+- **Turn-Based Combat**:
+  - Battle system includes type advantages, moves, and Pokémon stats like attack, defense, and speed.
+- **Item System**:
+  - Use Potions to heal or Pokéballs to capture Pokémon during wild encounters.
 
-**Usage**
-Roman Numerals Conversion:
-Convert Roman numerals to integers for tasks like identifying Pokémon generations.
-Example:
+---
 
-roman_to_int("iv")  # Returns 4
-Fetch Pokémon Regions
-Retrieve a list of all Pokémon regions from the API:
+## Prerequisites
 
-regions = getRegions()
-print(regions)  # ['kanto', 'johto', ...]
-Get Pokémon Types and Their Advantages
-Retrieve Pokémon types, their strengths, and weaknesses:
+- **Python 3.8+**
+- **Dependencies**:
+  - `requests` (for API calls)
+  - Modules:
+    - `pokemon.py`: Manages Pokémon properties and moves.
+    - `team.py`: Handles team management.
+    - `pokeball.py`: Implements capturing mechanics.
+    - `potion.py`: Manages healing mechanics.
+    - `apiRequest.py`: Fetches data from the Pokémon API.
 
-type_advantages = getTypesAdvantages()
-print(type_advantages['fire'])  
-**{'strength': ['grass', 'bug', 'ice', 'steel'], 'weakness': ['water', 'rock', 'ground']}**
-Fetch Pokémon Stats
-Retrieve stats for a specific Pokémon:
+---
 
-stats = getPokemonStats("pikachu")
-print(stats)  
-**{'speed': 90, 'special-defense': 50, 'special-attack': 50, 'defense': 40, 'attack': 55, 'hp': 35, 'type': ['electric']}**
-Generate a Moveset for a Pokémon
-Randomly assign four moves to a Pokémon:
+## Installation
 
-moves = getPokemonMove("charizard")
-random_moves = pickRandomFourMoves(moves)
-print(random_moves)
-**{'flamethrower': 'fire', 'fly': 'flying', ...}**
-Play Pokémon Cries
-Play a Pokémon’s cry sound:
+1. Clone the repository:
+   ```bash
+   git clone <repository_url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd pokemon-battle-simulator
+   ```
+3. Install required dependencies:
+   ```bash
+   pip install requests
+   ```
 
-getPokemonSound(pikachu)
-Error Handling
-This library includes robust error handling:
+---
 
-apiConnectionError: Raised when there’s an issue connecting to the Pokémon API.
-Invalid API responses are gracefully handled with appropriate error messages.
-Code Overview
-Functions
-General Utilities
-romanToInt(s): Converts a Roman numeral string to an integer.
-checkResponse(response): Ensures API responses are valid and returns JSON data.
-Pokémon API Interactions
-getRegions(): Fetches a list of all Pokémon regions.
-getPokemonTypes(): Fetches a list of all Pokémon types.
-getTypesAdvantages(): Builds a dictionary of type strengths and weaknesses.
-getGenerations(): Fetches Pokémon generations and converts their Roman numeral names to integers.
-getGenerationPokemon(generation): Fetches all Pokémon from a specific generation.
-getPokemonStats(pokemon): Fetches a Pokémon's stats and types.
-getPokemonMove(pokemon): Retrieves a list of all moves available to a Pokémon.
-pickRandomFourMoves(movesList): Randomly selects four moves and fetches their types.
-Audio
-getPokemonSound(pokemon): Plays a Pokémon’s cry.
-Future Enhancements
-Add a Pokémon battle simulation using the type advantages and stats.
-Implement caching for API calls to reduce latency and API usage.
-Expand support for more Pokémon features, such as abilities and evolutions.
-License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+## API Integration
+
+The **Pokémon API** (https://pokeapi.co/) is used extensively to enhance gameplay. Here's how the API contributes to the simulator:
+
+- **Fetching Generations**:
+  - The program retrieves the list of all available Pokémon generations (e.g., Gen I, Gen II, etc.).
+- **Getting Pokémon Stats**:
+  - For each Pokémon selected or encountered, the API provides stats like HP, attack, defense, speed, and type.
+- **Moves and Sounds**:
+  - The API fetches a randomized list of four moves per Pokémon and plays their cries during battle.
+- **Type Advantages**:
+  - Dynamically fetches type interactions to calculate battle damage modifiers (e.g., water vs. fire).
+
+> **Note**: An internet connection is required for API functionality. If the API is unavailable, the game may not load Pokémon data.
+
+---
+
+## How to Play
+
+### Running the Game
+1. Launch the program:
+   ```bash
+   python main.py
+   ```
+
+2. **Select a Pokémon Generation**:
+   - Choose a generation to define the pool of Pokémon available for your team and opponents.
+
+3. **Build Your Team**:
+   - Pick up to six Pokémon from the selected generation. If you’re unsure, type `done` to end team selection early.
+
+4. **Engage in Battles**:
+   - Choose between wild encounters or trainer battles.
+   - Use items, switch Pokémon, or execute moves strategically during combat.
+
+---
+
+## Gameplay Instructions
+
+### **Main Menu**
+1. **Wild Encounters**:
+   - Battle or catch wild Pokémon using your Pokéballs.
+2. **Trainer Battles**:
+   - Compete against AI trainers with randomized Pokémon teams.
+
+### **Battle Options**
+- **Fight**: Use one of your Pokémon's moves.
+- **Switch Pokémon**: Change your active Pokémon.
+- **Use Items**: Heal with potions or use Pokéballs (wild battles only).
+- **Run**: Escape from a wild encounter or forfeit a trainer battle.
+
+---
+
+## Example Gameplay
+
+1. **Choose a Pokémon Generation**:
+   ```
+   1. All
+   2. Generation I
+   ...
+   10. Generation IX
+   Which generation would you like to use?: 1
+   ```
+
+2. **Build Your Team**:
+   ```
+   Please enter the name of the Pokémon you want on your team:
+   pikachu
+   bulbasaur
+   done
+   ```
+
+3. **Battle Example**:
+   - Your team: Pikachu, Bulbasaur.
+   - Opponent's Pokémon: Charmander.
+
+   ```
+   Pikachu's moves:
+   1. Thunderbolt    2. Quick Attack
+   3. Iron Tail      4. Electro Ball
+   Which move would you like to use?: 1
+   Pikachu used Thunderbolt!
+   It's super effective!
+   ```
+
+---
+
+## Key Functions
+
+- **API Calls**:
+  - `getGenerations()`: Retrieves all Pokémon generations.
+  - `getGenerationPokemon()`: Fetches Pokémon names for a given generation.
+  - `getPokemonStats()`: Retrieves detailed stats for a specific Pokémon.
+  - `getTypesAdvantages()`: Fetches and calculates type effectiveness.
+  - `getPokemonMove()`: Gets a pool of available moves for a Pokémon.
+  - `pickRandomFourMoves()`: Randomly selects four moves from the pool.
+  - `getPokemonSound()`: Plays the cry sound of a Pokémon.
+
+- **Game Functions**:
+  - `choosePokemonTeam()`: Allows players to build their team.
+  - `chooseOpponentPokemonTeam()`: Randomly generates an AI opponent's team.
+  - `battle()`: Manages turn-based combat between teams.
+
+---
+
+## Future Improvements
+
+- Add leveling, experience points, and evolution mechanics.
+- Introduce status effects like paralysis, poison, and sleep.
+- Enhance AI with strategic behavior based on type matchups.
+- Enable persistent game saves.
+- Add multiplayer functionality for player-vs-player battles.
+
+---
+
+## Contributing
+
+If you’re interested in improving the game, feel free to fork the repository, make changes, and submit a pull request. Suggestions are always welcome!
