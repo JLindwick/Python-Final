@@ -20,17 +20,19 @@ Pokémon Sound Effects
 Plays Pokémon cries using vlc.
 
 **Installation**
+
 **Prerequisites**
 Python 3.8 or higher
+
 **Dependencies**:
 requests: For API communication
 vlc: To play Pokémon cries
 random: For random sampling of movesets
 Install the required dependencies via pip:
-
 pip install requests python-vlc
+
 **Usage**
-Roman Numerals Conversion
+Roman Numerals Conversion:
 Convert Roman numerals to integers for tasks like identifying Pokémon generations.
 Example:
 
